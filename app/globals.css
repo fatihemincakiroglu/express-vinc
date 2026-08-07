@@ -732,3 +732,12 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 .pcard-actions .btn{width:100%;justify-content:center;padding:10px 8px;font-size:.76rem}
 @media (max-width:900px){.cat-nav{top:71px}}
 @media (max-width:680px){.cat-nav{top:65px}.prod-group{scroll-margin-top:130px}}
+
+
+/* ---------- Makine bul: kriter rozetleri ---------- */
+.finder-crit{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.finder-crit span{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:7px 14px;font-size:.78rem;font-weight:800;color:var(--ink);
+}
+.finder-crit .crit-count{background:var(--gold);border-color:var(--gold)}

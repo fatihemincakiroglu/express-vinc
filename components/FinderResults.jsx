@@ -1,10 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
-import { matchProducts, capText } from "@/lib/products";
-import { CAT_ICONS } from "./CatIcons";
-import Link from "next/link";
+import { matchProducts, capText, productImage } from "@/lib/products";
 import { productPath } from "@/lib/routes";
 import QuoteCard from "./QuoteCard";
 
@@ -36,24 +35,37 @@ export default function FinderResults({ lang = "tr" }) {
           <QuoteCard lang={lang} initialTab="asistan" asstInit={{ carry, power, min, max }} />
         </div>
         <div>
-          <div className="section-head" style={{ marginBottom: 26 }}>
+          <div className="section-head" style={{ marginBottom: 22 }}>
             <span className="eyebrow">{q.tabAsst}</span>
             <h2>{q.matchesH}</h2>
-            <p>{q.carryOpts[carry]} · {q.powerOpts[power]} · {min || "?"}–{max || "?"} m</p>
+          </div>
+          <div className="finder-crit">
+            <span>{q.carryOpts[carry]}</span>
+            <span>{q.powerOpts[power]}</span>
+            <span>{min || "?"}–{max || "?"} m</span>
+            <span className="crit-count">{results.length}</span>
           </div>
           <div className="prod-grid finder-results">
             {results.map((p) => (
-              <div className="prod-card" key={p.model}>
-                <span className="prod-ico">{CAT_ICONS[p.cat]}</span>
-                <h3>{p.model}</h3>
-                <p className="prod-cat">{t.cats[p.cat]}</p>
-                <ul className="prod-specs">
-                  <li><span>{q.whLabel}</span><strong>{p.h} m</strong></li>
-                  <li><span>{q.capLabel}</span><strong>{capText(p.cap)}</strong></li>
-                  <li><span>{q.powerLabel}</span><strong>{q.powerOpts[p.power]}</strong></li>
-                </ul>
-                <Link className="more" href={productPath(lang, p)}>{t.prodPage.detail} →</Link>
-                <a className="btn btn-gold" href={waLink(p.model)} target="_blank" rel="noopener">{q.sendQuote}</a>
+              <div className="prod-card has-img" key={p.slug}>
+                <Link href={productPath(lang, p)} className="pcard-media">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="pcard-img" src={productImage(p)} alt={p.model} loading="lazy" />
+                  <span className="pcard-pow">{q.powerOpts[p.power]}</span>
+                  <span className="pcard-h">{p.h} m</span>
+                </Link>
+                <div className="pcard-body">
+                  <p className="prod-cat">{t.cats[p.cat]}</p>
+                  <Link href={productPath(lang, p)}><h3>{p.model}</h3></Link>
+                  <ul className="prod-specs">
+                    <li><span>{q.whLabel}</span><strong>{p.h} m</strong></li>
+                    <li><span>{q.capLabel}</span><strong>{capText(p.cap)}</strong></li>
+                  </ul>
+                  <div className="pcard-actions">
+                    <Link className="btn btn-ghost" href={productPath(lang, p)}>{t.prodPage.detail}</Link>
+                    <a className="btn btn-gold" href={waLink(p.model)} target="_blank" rel="noopener">{q.sendQuote}</a>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
