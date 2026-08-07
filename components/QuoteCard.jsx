@@ -5,6 +5,7 @@ import { T } from "@/lib/i18n";
 import Dropdown from "./Dropdown";
 import { CAT_ICONS } from "./CatIcons";
 import LocationInput from "./LocationInput";
+import ThanksBox from "./ThanksBox";
 
 // Kriterlere göre kategori önerisi (indeksler T[lang].cats sırasına göre)
 // 0 Akülü Makaslı · 1 Dizel Makaslı · 2 Dikey · 3 Eklemli · 4 Örümcek Plt · 5 Örümcek Vinç · 6 Araç Üstü · 7 Forklift
@@ -19,6 +20,7 @@ export default function QuoteCard({ lang = "tr" }) {
   const t = T[lang].quote;
   const cats = T[lang].cats;
   const [tab, setTab] = useState("teklif");
+  const [sent, setSent] = useState(false);
 
   // Hızlı Teklif
   const [form, setForm] = useState({ service: cats[0], location: "", date: "", name: "" });
@@ -30,6 +32,7 @@ export default function QuoteCard({ lang = "tr" }) {
       `${t.fService}: ${form.service}\n${t.fLocation}: ${form.location || "-"}\n` +
       `${t.fDate}: ${form.date || "-"}\n${t.fName}: ${form.name || "-"}`;
     window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+    setSent(true);
   };
 
   // Kiralama Asistanı
@@ -51,7 +54,16 @@ export default function QuoteCard({ lang = "tr" }) {
       `${t.fCarry}: ${t.carryOpts[carry]}\n${t.fPower}: ${t.powerOpts[power]}\n` +
       `${t.fHeight}: ${hMin || "?"}-${hMax || "?"} m\n${t.fSuggested}: ${names}`;
     window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+    setSent(true);
   };
+
+  if (sent) {
+    return (
+      <div className="quote-card">
+        <ThanksBox lang={lang} onReset={() => { setSent(false); setResult(null); }} />
+      </div>
+    );
+  }
 
   return (
     <div className="quote-card">

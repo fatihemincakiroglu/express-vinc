@@ -2,17 +2,28 @@
 import { useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
+import ThanksBox from "./ThanksBox";
 
 export default function ContactForm({ lang = "tr" }) {
   const t = T[lang].quote;
   const tc = T[lang].contact;
+  const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const send = () => {
     const msg = `${t.hello},\n${t.fName}: ${form.name || "-"}\n${t.fPhone}: ${form.phone || "-"}\n${t.fMsg}: ${form.message || "-"}`;
     window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+    setSent(true);
   };
+
+  if (sent) {
+    return (
+      <div className="quote-card">
+        <ThanksBox lang={lang} onReset={() => setSent(false)} />
+      </div>
+    );
+  }
 
   return (
     <div className="quote-card">

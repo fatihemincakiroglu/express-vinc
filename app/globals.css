@@ -537,3 +537,23 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 
 .seo-credit{font-weight:700}
 .seo-credit:hover{color:#111}
+
+
+/* ---------- Teşekkür kutusu ---------- */
+.thanks-box{text-align:center;padding:34px 10px 22px;animation:dd-in .3s ease}
+.thanks-check{
+  width:74px;height:74px;margin:0 auto 20px;border-radius:50%;
+  background:var(--gold);color:#111;display:grid;place-items:center;
+  box-shadow:0 14px 34px rgba(255,205,0,.4);
+  animation:thanks-pop .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.thanks-check svg{width:34px;height:34px}
+@keyframes thanks-pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.thanks-box h3{font-size:1.5rem;color:var(--ink);margin-bottom:9px}
+.thanks-box p{color:var(--muted);font-size:.95rem;max-width:34ch;margin:0 auto 20px}
+.thanks-again{
+  border:0;background:transparent;font-family:inherit;font-size:.8rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);cursor:pointer;padding:6px;
+}
+.thanks-again:hover{color:#111}
+@media (prefers-reduced-motion:reduce){.thanks-box,.thanks-check{animation:none}}

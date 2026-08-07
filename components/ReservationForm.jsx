@@ -5,11 +5,13 @@ import { T } from "@/lib/i18n";
 import Dropdown from "./Dropdown";
 import { CAT_ICONS } from "./CatIcons";
 import LocationInput from "./LocationInput";
+import ThanksBox from "./ThanksBox";
 
 export default function ReservationForm({ lang = "tr" }) {
   const t = T[lang].quote;
   const tr = T[lang].rez;
   const services = T[lang].cats;
+  const [sent, setSent] = useState(false);
   const [f, setF] = useState({ service: services[0], location: "", date: "", time: "", name: "", phone: "", note: "" });
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
 
@@ -20,7 +22,16 @@ export default function ReservationForm({ lang = "tr" }) {
       `${t.fDate}: ${f.date || "-"} ${f.time || ""}\n${t.fName}: ${f.name || "-"}\n` +
       `${t.fPhone}: ${f.phone || "-"}\n${t.fNote}: ${f.note || "-"}`;
     window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+    setSent(true);
   };
+
+  if (sent) {
+    return (
+      <div className="quote-card">
+        <ThanksBox lang={lang} onReset={() => setSent(false)} />
+      </div>
+    );
+  }
 
   return (
     <div className="quote-card">
