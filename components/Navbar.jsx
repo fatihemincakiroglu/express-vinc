@@ -27,15 +27,19 @@ export default function Navbar({ lang = "tr" }) {
     <>
       <div className="topbar">
         <div className="container">
-          <span>{t.topbar}</span>
-          <div className="topbar-right">
-            <nav className="lang-switch" aria-label="Dil seçimi">
-              {["tr", "en", "de"].map((l) => (
-                <a key={l} href={langHref(l)} className={l === lang ? "on" : ""}>{l.toUpperCase()}</a>
-              ))}
-            </nav>
-            <a href={`tel:${CONFIG.phoneLink}`}>☎ {CONFIG.phoneDisplay}</a>
+          <div className="topbar-scroll" aria-hidden="true">
+            <div className="topbar-scroll-inner">
+              {[0, 1, 2, 3].map((i) => <span key={i}>{t.topbar} ✦ </span>)}
+            </div>
           </div>
+          <nav className="lang-switch" aria-label="Language">
+            {["tr", "en", "de"].map((l) => (
+              <a key={l} href={langHref(l)} className={l === lang ? "on" : ""} title={l.toUpperCase()}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/flags/${l}.png`} alt={l.toUpperCase()} width="22" height="22" />
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
       <header className="navbar">

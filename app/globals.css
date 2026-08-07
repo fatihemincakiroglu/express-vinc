@@ -234,7 +234,9 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 
 /* ---------- Mobil ---------- */
 @media (max-width:960px){
-  .hero .container{grid-template-columns:1fr;gap:40px;padding-top:56px;padding-bottom:64px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .hero .container{grid-template-columns:1fr;gap:34px;padding-top:34px;padding-bottom:70px}
+  .hero .quote-card{order:-1}
   .crane-art{display:none}
   .cards{grid-template-columns:1fr 1fr}
   .split,.contact-grid{grid-template-columns:1fr;gap:36px}
@@ -253,6 +255,8 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .navbar .btn{display:none}
 }
 @media (max-width:680px){
+  .footer-grid{grid-template-columns:1fr;gap:30px;padding:44px 0 34px}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;align-items:center}
   .float-stack{display:none}
   .mobile-bar{
     display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
