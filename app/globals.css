@@ -43,11 +43,20 @@ h1,h2,h3,.serif{font-family:"Archivo",system-ui,sans-serif;line-height:1.12;font
 .hero .eyebrow{color:var(--gold)}
 
 /* ---------- Üst bant ---------- */
-.topbar{background:var(--gold);color:#111;font-size:.78rem}
-.topbar .container{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px;gap:10px}
-.topbar span{letter-spacing:.16em;text-transform:uppercase;font-weight:600}
-.topbar a{color:#111;font-weight:800;letter-spacing:.05em}
-.topbar a:hover{opacity:.7}
+.topbar{background:var(--gold);color:#111;font-size:.72rem;border-bottom:1px solid rgba(0,0,0,.08)}
+.topbar .container{display:flex;align-items:center;padding-top:8px;padding-bottom:8px;gap:18px;flex-wrap:nowrap}
+.topbar-scroll{
+  flex:1 1 auto;overflow:hidden;min-width:0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+}
+.topbar-scroll-inner{display:flex;width:max-content;animation:topbar-marquee 26s linear infinite;will-change:transform}
+.topbar-scroll-inner span{
+  flex:none;white-space:nowrap;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:800;padding-right:56px;line-height:1;
+}
+@keyframes topbar-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.topbar-scroll-inner{animation:none}}
 
 /* ---------- Menü ---------- */
 .navbar{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
@@ -278,9 +287,8 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   body{padding-bottom:76px}
   .brand-logo{height:38px}
 
-  .topbar span:first-child{display:none}
-  .topbar .container{justify-content:center}
-  .topbar-right{width:100%;justify-content:space-between}
+  .topbar-scroll{display:none}
+  .topbar .container{justify-content:flex-end;padding-top:6px;padding-bottom:6px}
   .cards{grid-template-columns:1fr}
   .chips{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
@@ -426,9 +434,14 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 }
 
 
-/* ---------- Dil degistirici ---------- */
-.topbar-right{display:flex;align-items:center;gap:16px}
-.lang-switch{display:flex;gap:2px;background:rgba(0,0,0,.1);border-radius:999px;padding:3px}
-.lang-switch a{font-size:.68rem;font-weight:800;padding:3px 9px;border-radius:999px;color:#111;opacity:.65}
-.lang-switch a.on{background:#111;color:var(--gold);opacity:1}
-.lang-switch a:hover{opacity:1}
+/* ---------- Dil degistirici (bayraklar) ---------- */
+.lang-switch{display:flex;align-items:center;gap:8px;flex:0 0 auto;margin-left:auto}
+.lang-switch a{
+  display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;flex:none;padding:0;
+  border:2px solid transparent;opacity:.5;transition:.18s;
+  overflow:hidden;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+.lang-switch a img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.lang-switch a.on{opacity:1;border-color:#111;transform:scale(1.12)}
+.lang-switch a:hover{opacity:1;transform:scale(1.08)}
