@@ -8,10 +8,10 @@ import LocationInput from "./LocationInput";
 import ThanksBox from "./ThanksBox";
 import RentalAssistant from "./RentalAssistant";
 
-export default function QuoteCard({ lang = "tr" }) {
+export default function QuoteCard({ lang = "tr", initialTab = "teklif", asstInit }) {
   const t = T[lang].quote;
   const cats = T[lang].cats;
-  const [tab, setTab] = useState("teklif");
+  const [tab, setTab] = useState(initialTab);
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ service: cats[0], location: "", date: "", name: "" });
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
@@ -61,7 +61,7 @@ export default function QuoteCard({ lang = "tr" }) {
           </>
         )
       ) : (
-        <RentalAssistant lang={lang} />
+        <RentalAssistant lang={lang} init={asstInit} />
       )}
     </div>
   );
