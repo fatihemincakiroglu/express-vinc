@@ -631,3 +631,8 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .pd-grid{grid-template-columns:1fr}
   .pd-cta{position:static}
 }
+
+
+/* ---------- İlgili yazılar ---------- */
+.related-posts{border-top:1px solid var(--line);margin-top:64px;padding-top:56px}
+.related-posts .section-head{margin-bottom:30px}

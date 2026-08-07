@@ -5,9 +5,10 @@ import { blogPostPath } from "@/lib/routes";
 
 const LOCALE = { tr: "tr-TR", en: "en-GB", de: "de-DE" };
 
-export default function BlogCards({ lang = "tr", limit }) {
+export default function BlogCards({ lang = "tr", limit, posts }) {
   const t = T[lang].blogSec;
-  const list = limit ? POSTS.slice(0, limit) : POSTS;
+  const base = posts || POSTS;
+  const list = limit ? base.slice(0, limit) : base;
   const fmt = (d) => new Date(d).toLocaleDateString(LOCALE[lang], { day: "numeric", month: "long", year: "numeric" });
   return (
     <div className="blog-cards">
