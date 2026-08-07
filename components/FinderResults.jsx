@@ -4,6 +4,8 @@ import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
 import { matchProducts, capText } from "@/lib/products";
 import { CAT_ICONS } from "./CatIcons";
+import Link from "next/link";
+import { productPath } from "@/lib/routes";
 import QuoteCard from "./QuoteCard";
 
 export default function FinderResults({ lang = "tr" }) {
@@ -50,6 +52,7 @@ export default function FinderResults({ lang = "tr" }) {
                   <li><span>{q.capLabel}</span><strong>{capText(p.cap)}</strong></li>
                   <li><span>{q.powerLabel}</span><strong>{q.powerOpts[p.power]}</strong></li>
                 </ul>
+                <Link className="more" href={productPath(lang, p)}>{t.prodPage.detail} →</Link>
                 <a className="btn btn-gold" href={waLink(p.model)} target="_blank" rel="noopener">{q.sendQuote}</a>
               </div>
             ))}
