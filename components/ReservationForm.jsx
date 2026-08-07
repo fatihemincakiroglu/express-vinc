@@ -4,6 +4,7 @@ import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
 import Dropdown from "./Dropdown";
 import { CAT_ICONS } from "./CatIcons";
+import LocationInput from "./LocationInput";
 
 export default function ReservationForm({ lang = "tr" }) {
   const t = T[lang].quote;
@@ -26,10 +27,8 @@ export default function ReservationForm({ lang = "tr" }) {
       <h3>{tr.formH}</h3>
       <p className="sub">{tr.formP}</p>
       <Dropdown label={t.service} value={f.service} onChange={(v) => setF({ ...f, service: v })} options={services} icons={CAT_ICONS} />
-      <div className="field">
-        <label htmlFor="r-location">{t.location}</label>
-        <input id="r-location" type="text" placeholder={t.locPh} value={f.location} onChange={set("location")} />
-      </div>
+      <LocationInput id="r-location" label={t.location} placeholder={t.locPh}
+        value={f.location} onChange={(v) => setF({ ...f, location: v })} />
       <div className="field-row">
         <div className="field"><label htmlFor="r-date">{t.date}</label><input id="r-date" type="date" value={f.date} onChange={set("date")} /></div>
         <div className="field"><label htmlFor="r-time">{t.time}</label><input id="r-time" type="time" value={f.time} onChange={set("time")} /></div>

@@ -4,6 +4,7 @@ import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
 import Dropdown from "./Dropdown";
 import { CAT_ICONS } from "./CatIcons";
+import LocationInput from "./LocationInput";
 
 // Kriterlere göre kategori önerisi (indeksler T[lang].cats sırasına göre)
 // 0 Akülü Makaslı · 1 Dizel Makaslı · 2 Dikey · 3 Eklemli · 4 Örümcek Plt · 5 Örümcek Vinç · 6 Araç Üstü · 7 Forklift
@@ -68,10 +69,8 @@ export default function QuoteCard({ lang = "tr" }) {
             options={cats}
             icons={CAT_ICONS}
           />
-          <div className="field">
-            <label htmlFor="q-location">{t.location}</label>
-            <input id="q-location" type="text" placeholder={t.locPh} value={form.location} onChange={set("location")} />
-          </div>
+          <LocationInput id="q-location" label={t.location} placeholder={t.locPh}
+            value={form.location} onChange={(v) => setForm({ ...form, location: v })} />
           <div className="field-row">
             <div className="field">
               <label htmlFor="q-date">{t.date}</label>
