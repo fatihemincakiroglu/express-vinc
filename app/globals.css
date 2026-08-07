@@ -636,3 +636,66 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 /* ---------- İlgili yazılar ---------- */
 .related-posts{border-top:1px solid var(--line);margin-top:64px;padding-top:56px}
 .related-posts .section-head{margin-bottom:30px}
+
+
+/* ---------- Ürün detay (premium) ---------- */
+.pdx-hero{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-bottom:34px}
+.pdx-media{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3}
+.pdx-media img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.pdx-media:hover img{transform:scale(1.03)}
+.pdx-badge-cat{
+  position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:999px;
+  padding:8px 15px 8px 10px;font-size:.78rem;font-weight:800;color:var(--ink);
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+.pdx-badge-cat .dd-ico{width:22px;height:22px}
+.pdx-badge-pow{
+  position:absolute;right:16px;top:16px;background:var(--gold);color:#111;
+  border-radius:999px;padding:8px 15px;font-size:.74rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+.pdx-info h2{font-size:clamp(1.7rem,3vw,2.5rem);color:var(--ink);margin-bottom:14px}
+.pdx-lead{color:#454540;font-size:1rem;line-height:1.7;margin-bottom:24px;max-width:56ch}
+.pdx-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.pdx-stat{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 12px;
+  text-align:center;display:grid;gap:4px;
+}
+.pdx-stat .num{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink)}
+.pdx-stat .num small{font-size:.9rem;color:var(--muted)}
+.pdx-stat .num.pdx-pow{font-size:1.02rem;line-height:1.4;display:flex;align-items:center;justify-content:center;min-height:2.1rem}
+.pdx-stat .lbl{font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pdx-actions{display:flex;gap:11px;flex-wrap:wrap}
+.pdx-periods{margin-top:14px;font-size:.82rem;color:var(--muted);font-weight:600}
+.pdx-trust{
+  display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:18px 22px;margin-bottom:56px;
+}
+.pdx-trust span{display:flex;align-items:center;gap:9px;font-size:.85rem;font-weight:700;color:var(--ink)}
+.pdx-trust i{
+  font-style:normal;width:21px;height:21px;flex:none;border-radius:50%;
+  background:var(--gold);color:#111;display:grid;place-items:center;font-size:.68rem;font-weight:900;
+}
+.pdx-body{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:64px}
+.pdx-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
+.pdx-card h3{font-size:1.1rem;color:var(--ink);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--gold);display:inline-block}
+.pdx-card .pd-specs{border:0;max-width:none}
+.pdx-card .pd-specs li{padding:12px 14px}
+.pdx-use{color:#454540;font-size:.96rem;line-height:1.75}
+
+/* Benzer ürün kartları (görselli) */
+.prod-card.has-img{padding:0;overflow:hidden}
+.pcard-img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.pcard-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+
+@media (max-width:960px){
+  .pdx-hero{grid-template-columns:1fr;gap:26px}
+  .pdx-body{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .pdx-stats{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .pdx-actions .btn{width:100%}
+  .pdx-trust{gap:10px 16px;padding:15px 16px}
+}
