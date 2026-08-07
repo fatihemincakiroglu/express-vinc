@@ -2,11 +2,13 @@
 import { useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
+import Dropdown from "./Dropdown";
+import { CAT_ICONS } from "./CatIcons";
 
 export default function ReservationForm({ lang = "tr" }) {
   const t = T[lang].quote;
   const tr = T[lang].rez;
-  const services = T[lang].services.list.map((s) => s.t);
+  const services = T[lang].cats;
   const [f, setF] = useState({ service: services[0], location: "", date: "", time: "", name: "", phone: "", note: "" });
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
 
@@ -23,12 +25,7 @@ export default function ReservationForm({ lang = "tr" }) {
     <div className="quote-card">
       <h3>{tr.formH}</h3>
       <p className="sub">{tr.formP}</p>
-      <div className="field">
-        <label htmlFor="r-service">{t.service}</label>
-        <select id="r-service" value={f.service} onChange={set("service")}>
-          {services.map((s) => <option key={s}>{s}</option>)}
-        </select>
-      </div>
+      <Dropdown label={t.service} value={f.service} onChange={(v) => setF({ ...f, service: v })} options={services} icons={CAT_ICONS} />
       <div className="field">
         <label htmlFor="r-location">{t.location}</label>
         <input id="r-location" type="text" placeholder={t.locPh} value={f.location} onChange={set("location")} />

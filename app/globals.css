@@ -447,3 +447,72 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 .lang-switch a img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .lang-switch a.on{opacity:1;border-color:#111;transform:scale(1.12)}
 .lang-switch a:hover{opacity:1;transform:scale(1.08)}
+
+
+/* ---------- Premium açılır menü ---------- */
+.dd{position:relative}
+.dd-btn{
+  width:100%;display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;
+  background:#FAFAF7;font-family:inherit;font-size:.93rem;font-weight:700;color:var(--ink);
+  cursor:pointer;transition:.2s;text-align:left;
+}
+.dd.open .dd-btn,.dd-btn:hover{border-color:var(--gold);background:#fff}
+.dd-val{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-ico{width:26px;height:26px;flex:none;color:#1A1A1A;display:grid;place-items:center}
+.dd-ico svg{width:100%;height:100%}
+.dd-chev{width:16px;height:16px;flex:none;color:#8a8a82;transition:.25s}
+.dd.open .dd-chev{transform:rotate(180deg)}
+.dd-list{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;z-index:40;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 22px 50px rgba(0,0,0,.16);list-style:none;
+  padding:7px;max-height:290px;overflow:auto;
+  animation:dd-in .18s ease;
+}
+@keyframes dd-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.dd-opt{
+  width:100%;display:flex;align-items:center;gap:11px;text-align:left;
+  padding:10px 11px;border:0;border-radius:10px;background:transparent;
+  font-family:inherit;font-size:.9rem;font-weight:600;color:var(--ink);
+  cursor:pointer;transition:.15s;
+}
+.dd-opt:hover{background:#FFF8DC}
+.dd-opt.on{background:var(--gold);font-weight:800}
+.dd-opt.on .dd-ico{color:#111}
+.dd-opt span:nth-child(2){flex:1}
+.dd-check{font-weight:900;font-size:.8rem}
+
+/* ---------- Segmentli seçim (asistan) ---------- */
+.segmented{display:flex;gap:6px;background:#F1F0EA;border-radius:12px;padding:5px}
+.segmented button{
+  flex:1;border:0;background:transparent;padding:10px 6px;border-radius:9px;
+  font-family:inherit;font-size:.82rem;font-weight:800;color:#6B6B63;cursor:pointer;transition:.18s;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+}
+.segmented button.on{background:var(--gold);color:#111;box-shadow:0 3px 10px rgba(0,0,0,.12)}
+
+/* Metre girişi */
+.unit-wrap{position:relative}
+.unit-wrap input{padding-right:38px}
+.unit-wrap span{
+  position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  font-size:.78rem;font-weight:800;color:#8a8a82;pointer-events:none;
+}
+
+/* BUL butonu */
+.btn-find{letter-spacing:.14em}
+.btn-find svg{width:17px;height:17px}
+
+/* Öneri kutusu */
+.suggest-box{
+  margin-top:14px;background:#FFFBEA;border:1.5px solid var(--gold);
+  border-radius:14px;padding:16px;animation:dd-in .25s ease;
+}
+.suggest-lead{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:10px}
+.suggest-items{display:grid;gap:8px;margin-bottom:13px}
+.suggest-item{
+  display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:9px 12px;font-size:.9rem;font-weight:800;color:var(--ink);
+}
+.suggest-box .btn{width:100%;justify-content:center;margin-top:0}
