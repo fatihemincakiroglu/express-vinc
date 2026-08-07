@@ -45,6 +45,7 @@ h1,h2,h3,.serif{font-family:"Archivo",system-ui,sans-serif;line-height:1.12;font
 /* ---------- Üst bant ---------- */
 .topbar{background:var(--gold);color:#111;font-size:.72rem;border-bottom:1px solid rgba(0,0,0,.08)}
 .topbar .container{display:flex;align-items:center;padding-top:8px;padding-bottom:8px;gap:18px;flex-wrap:nowrap}
+.topbar-mobile{display:none;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .topbar-scroll{
   flex:1 1 auto;overflow:hidden;min-width:0;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
@@ -288,7 +289,8 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .brand-logo{height:38px}
 
   .topbar-scroll{display:none}
-  .topbar .container{justify-content:flex-end;padding-top:6px;padding-bottom:6px}
+  .topbar-mobile{display:block;flex:1 1 auto;font-size:.68rem}
+  .topbar .container{justify-content:space-between;padding-top:7px;padding-bottom:7px;gap:10px}
   .cards{grid-template-columns:1fr}
   .chips{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}

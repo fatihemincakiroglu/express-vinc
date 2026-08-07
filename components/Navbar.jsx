@@ -27,6 +27,7 @@ export default function Navbar({ lang = "tr" }) {
     <>
       <div className="topbar">
         <div className="container">
+          <span className="topbar-mobile">{t.topbarMobile}</span>
           <div className="topbar-scroll" aria-hidden="true">
             <div className="topbar-scroll-inner">
               {[0, 1, 2, 3].map((i) => <span key={i}>{t.topbar} ✦ </span>)}
