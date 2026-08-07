@@ -699,3 +699,36 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .pdx-actions .btn{width:100%}
   .pdx-trust{gap:10px 16px;padding:15px 16px}
 }
+
+
+/* ---------- Ürünler listesi (görselli) ---------- */
+.cat-nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:79px;z-index:40}
+.cat-nav-track{display:flex;gap:8px;overflow-x:auto;padding:12px 0;scrollbar-width:none}
+.cat-nav-track::-webkit-scrollbar{display:none}
+.cat-nav-chip{
+  display:flex;align-items:center;gap:8px;flex:none;
+  background:#F4F3ED;border:1px solid var(--line);border-radius:999px;
+  padding:8px 15px 8px 10px;font-size:.78rem;font-weight:800;color:var(--ink);
+  white-space:nowrap;transition:.18s;
+}
+.cat-nav-chip .dd-ico{width:20px;height:20px}
+.cat-nav-chip:hover{background:var(--gold);border-color:var(--gold)}
+.prod-group{scroll-margin-top:150px}
+.pcard-media{position:relative;display:block}
+.pcard-pow{
+  position:absolute;right:10px;top:10px;background:var(--gold);color:#111;
+  border-radius:999px;padding:5px 11px;font-size:.66rem;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+.pcard-h{
+  position:absolute;left:10px;bottom:10px;background:rgba(17,17,17,.85);color:#fff;
+  border-radius:999px;padding:5px 12px;font-size:.72rem;font-weight:800;
+  font-family:"Archivo",sans-serif;backdrop-filter:blur(4px);
+}
+.pcard-media .pcard-img{transition:.45s}
+.prod-card.has-img:hover .pcard-img{transform:scale(1.045)}
+.pcard-body h3:hover{color:var(--gold-deep)}
+.pcard-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.pcard-actions .btn{width:100%;justify-content:center;padding:10px 8px;font-size:.76rem}
+@media (max-width:900px){.cat-nav{top:71px}}
+@media (max-width:680px){.cat-nav{top:65px}.prod-group{scroll-margin-top:130px}}
