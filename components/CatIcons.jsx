@@ -9,4 +9,5 @@ export const CAT_ICONS = [
   <svg key="6" viewBox="0 0 48 48" {...S}><path d="M14 38h14M16 34h10v4H16z"/><path d="M12 38l-4 5M30 38l4 5M20 34V16l16-6"/><path d="M36 10v10M34 24h4v4h-4z"/></svg>,
   <svg key="7" viewBox="0 0 48 48" {...S}><path d="M6 36h30M8 32h20v4H8zM28 36h8l4-6h-6l-6 6z"/><circle cx="13" cy="40" r="2.5"/><circle cx="31" cy="40" r="2.5"/><path d="M14 32L28 14l8-4M34 12l6 2"/></svg>,
   <svg key="8" viewBox="0 0 48 48" {...S}><path d="M10 36h16M12 24h12l2 8M14 24v-8h8v8"/><circle cx="14" cy="40" r="3"/><circle cx="26" cy="40" r="3"/><path d="M32 40V14M32 36h8"/></svg>,
+  <svg key="9" viewBox="0 0 48 48" {...S}><path d="M6 38h26M8 34h18v4H8zM26 38h10l4-5h-8l-6 5z"/><circle cx="12" cy="42" r="2.5"/><circle cx="22" cy="42" r="2.5"/><circle cx="33" cy="42" r="2.5"/><path d="M12 34L30 12l8-3"/><path d="M38 9v8M36 21h4v3h-4z"/></svg>,
 ];
