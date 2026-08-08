@@ -741,3 +741,8 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   padding:7px 14px;font-size:.78rem;font-weight:800;color:var(--ink);
 }
 .finder-crit .crit-count{background:var(--gold);border-color:var(--gold)}
+
+
+/* ---------- Markalar ---------- */
+.brand-head h2{font-size:1.6rem;letter-spacing:.02em}
+.brand-img{object-fit:contain;background:#fff;padding:14px}

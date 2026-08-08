@@ -16,6 +16,7 @@ export default function Navbar({ lang = "tr" }) {
     { href: r(lang, "home"), label: t.nav.home, exact: true },
     { href: r(lang, "services"), label: t.nav.services },
     { href: r(lang, "products"), label: t.nav.products },
+    { href: r(lang, "brands"), label: t.nav.brands },
     { href: r(lang, "about"), label: t.nav.about },
     { href: r(lang, "blog"), label: t.nav.blog },
     { href: r(lang, "contact"), label: t.nav.contact },
