@@ -16,9 +16,10 @@ export default function FinderResults({ lang = "tr" }) {
   const power = parseInt(sp.get("p") ?? "1", 10) || 0;
   const min = sp.get("min") || "";
   const max = sp.get("max") || "";
-  const height = parseFloat(max) || parseFloat(min) || 10;
+  const minH = parseFloat(min) || 0;
+  const maxH = parseFloat(max) || 0;
 
-  const results = matchProducts(carry, power, height);
+  const results = matchProducts(carry, power, minH, maxH);
 
   const waLink = (model) => {
     const msg =
