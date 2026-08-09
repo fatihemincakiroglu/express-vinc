@@ -3,6 +3,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import BlogCards from "@/components/BlogCards";
 import { POSTS, getPost } from "@/lib/blog";
 import { BLOG_LINKS } from "@/lib/blog-links";
+import { blogFullContent } from "@/lib/blog-content";
 import { T } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { CONFIG } from "@/lib/config";
@@ -59,13 +60,16 @@ export default function BlogPostPage({ lang = "tr", post }) {
   const links = BLOG_LINKS[post.slugs.tr] || {};
   const fmt = (d) => new Date(d).toLocaleDateString(LOCALE[lang], { day: "numeric", month: "long", year: "numeric" });
 
-  // İlgili ürünler: eşleştirilen kategorilerden birkaç örnek
+  // İlgili ürünler: eşleştirilen kategorilerden örnekler (kullanıcı görsün diye 6 adet)
   const relCats = links.cats || [];
   const relProducts = relCats.length
-    ? PRODUCTS.filter((p) => relCats.includes(p.cat)).slice(0, 4)
+    ? PRODUCTS.filter((p) => relCats.includes(p.cat)).slice(0, 6)
     : [];
   const relBrands = links.brands || [];
   const usedKeys = new Set();
+
+  // 10 başlıklı genişletilmiş içerik
+  const fullContent = blogFullContent(post, lang, t);
 
   const url = SITE_URL + blogPostPath(lang, post);
   const plainText = c.content.filter((b) => b.p).map((b) => b.p).join(" ");
@@ -102,11 +106,27 @@ export default function BlogPostPage({ lang = "tr", post }) {
             <p className="eyebrow">{c.category} · {fmt(post.date)}</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="article-cover" src={post.cover} alt={c.title} />
-            {c.content.map((block, i) =>
-              block.h
-                ? <h2 key={i}>{block.h}</h2>
-                : <p key={i}>{linkifyParagraph(block.p, links.related, lang, usedKeys)}</p>
-            )}
+            {fullContent.map((block, i) => {
+              if (block.h) return <h2 key={i}>{block.h}</h2>;
+              if (block.ul) return (
+                <ul className="catp-ul" key={i}>
+                  {block.ul.map((li) => <li key={li}>{li}</li>)}
+                </ul>
+              );
+              if (block.table) return (
+                <div className="catp-table-wrap" key={i}>
+                  <table className="catp-table">
+                    <thead><tr>{block.table.head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+                    <tbody>
+                      {block.table.rows.map((row) => (
+                        <tr key={row[0]}>{row.map((cell, ci) => <td key={ci}>{cell}</td>)}</tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+              return <p key={i}>{linkifyParagraph(block.p, links.related, lang, usedKeys)}</p>;
+            })}
 
             {/* İlgili markalar */}
             {relBrands.length > 0 && (
