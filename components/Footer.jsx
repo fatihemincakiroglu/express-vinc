@@ -28,8 +28,8 @@ export default function Footer({ lang = "tr" }) {
           <div>
             <h4>{t.footer.products}</h4>
             <ul>
-              {T[lang].cats.map((c) => (
-                <li key={c}><Link href={r(lang, "products")}>{c}</Link></li>
+              {T[lang].cats.map((c, i) => (
+                <li key={c}><Link href={r(lang, `cat${i}`)}>{c}</Link></li>
               ))}
             </ul>
           </div>
