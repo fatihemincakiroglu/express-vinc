@@ -19,8 +19,27 @@ export default function ProductDetailPage({ lang = "tr", product }) {
   const desc = pp.descTpl(product.model, product.h, capText(product.cap), catName, q.powerOpts[product.power]);
   const isLifting = product.cat !== 5 && product.cat !== 7;
 
+  // ---- Product JSON-LD schema ----
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.model,
+    category: catName,
+    ...(product.brand && { brand: { "@type": "Brand", name: product.brand } }),
+    image: product.img ? [product.img] : undefined,
+    description: desc,
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "TRY",
+      businessFunction: "http://purl.org/goodrelations/v1#LeaseOut",
+      seller: { "@type": "Organization", name: CONFIG.companyName },
+    },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <Breadcrumb
         lang={lang}
         title={product.model}

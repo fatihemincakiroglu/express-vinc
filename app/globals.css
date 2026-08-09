@@ -816,3 +816,8 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 .pdx-brand strong{color:var(--ink);font-weight:800}
 .pdx-brand:hover{color:var(--gold-ink,#a8791f)}
 .pdx-brand:hover strong{color:var(--gold-ink,#a8791f)}
+
+/* ---------- Marka sayfası SSS bölümü ---------- */
+.brand-faq{margin-top:56px;border-top:1px solid var(--line);padding-top:40px}
+.brand-faq .faq-box{margin-top:24px}
+.brand-faq .section-head{text-align:left}

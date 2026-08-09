@@ -1,23 +1,70 @@
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import { CONFIG } from "@/lib/config";
+import { SITE_URL } from "@/lib/site";
 import { T } from "@/lib/i18n";
 import { r, productPath, brandPath } from "@/lib/routes";
 import { productsByBrand, capText, productImage, brandSlug } from "@/lib/products";
+import { brandSections, brandFaq } from "@/lib/brand-content";
 
 export default function BrandPage({ lang = "tr", brand }) {
   const t = T[lang];
   const q = t.quote;
   const items = productsByBrand(brand);
   const slug = brandSlug(brand);
+  const sections = brandSections(brand, lang, t);
+  const faq = brandFaq(brand, lang, t);
 
   const waLink = (model) => {
     const msg = `${q.hello}, ${q.waHead}.\n${q.fService}: ${model}`;
     return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
   };
 
+  // ---- JSON-LD schema (Brand + ItemList + FAQPage) ----
+  const pageUrl = SITE_URL + brandPath(lang, slug);
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Brand",
+        "@id": pageUrl + "#brand",
+        name: brand,
+        url: pageUrl,
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": pageUrl,
+        url: pageUrl,
+        name: `${brand} — Express Vinç`,
+        isPartOf: { "@id": SITE_URL + "#website" },
+        about: { "@id": pageUrl + "#brand" },
+      },
+      {
+        "@type": "ItemList",
+        name: `${brand} ${t.prodPage.brandProductsH}`,
+        numberOfItems: items.length,
+        itemListElement: items.slice(0, 30).map((p, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: SITE_URL + productPath(lang, p),
+          name: p.model,
+        })),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": pageUrl + "#faq",
+        mainEntity: faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <Breadcrumb
         lang={lang}
         title={brand}
@@ -39,6 +86,7 @@ export default function BrandPage({ lang = "tr", brand }) {
             </div>
           </div>
 
+          {/* ÜRÜNLER */}
           <div className="prod-head" style={{ marginTop: 40 }}>
             <h2>{t.prodPage.brandProductsH}</h2>
             <span className="prod-count">{items.length}</span>
@@ -66,6 +114,46 @@ export default function BrandPage({ lang = "tr", brand }) {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* MARKA İÇERİĞİ (10 başlık) */}
+          <div className="catp-body">
+            {sections.map((sec) => (
+              <div className="catp-sec" key={sec.h}>
+                <h2>{sec.h}</h2>
+                {sec.p.map((par) => <p key={par.slice(0, 40)}>{par}</p>)}
+                {sec.ul && (
+                  <ul className="catp-ul">
+                    {sec.ul.map((li) => <li key={li}>{li}</li>)}
+                  </ul>
+                )}
+                {sec.table && (
+                  <div className="catp-table-wrap">
+                    <table className="catp-table">
+                      <thead><tr>{sec.table.head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+                      <tbody>
+                        {sec.table.rows.map((row) => (
+                          <tr key={row[0]}>{row.map((cell, ci) => <td key={ci}>{cell}</td>)}</tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* SSS */}
+          <div className="brand-faq">
+            <div className="section-head"><span className="eyebrow">{t.faq.eyebrow}</span><h2>{brand} — {t.faq.h2}</h2></div>
+            <div className="faq-box">
+              {faq.map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}<span className="faq-ico">+</span></summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import FloatButtons from "./FloatButtons";
+import SiteSchema from "./SiteSchema";
 
 export default function LayoutShell({ lang, children }) {
   return (
@@ -15,6 +16,7 @@ export default function LayoutShell({ lang, children }) {
         />
       </head>
       <body>
+        <SiteSchema lang={lang} />
         <Navbar lang={lang} />
         <main>{children}</main>
         <FloatButtons lang={lang} />
