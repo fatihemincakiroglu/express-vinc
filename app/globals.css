@@ -821,3 +821,39 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 .brand-faq{margin-top:56px;border-top:1px solid var(--line);padding-top:40px}
 .brand-faq .faq-box{margin-top:24px}
 .brand-faq .section-head{text-align:left}
+
+/* ---------- Blog: içerik içi link + ilgili ürün/marka ---------- */
+.blog-inline-link{
+  color:var(--ink);font-weight:700;text-decoration:underline;
+  text-decoration-color:var(--gold);text-underline-offset:3px;
+  text-decoration-thickness:2px;transition:color .15s;
+}
+.blog-inline-link:hover{color:var(--gold-ink,#a8791f)}
+
+.blog-rel-brands{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.blog-rel-brands h3{font-size:1.05rem;color:var(--ink);margin-bottom:14px}
+.blog-brand-chips{display:flex;gap:10px;flex-wrap:wrap}
+.blog-brand-chip{
+  display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;
+  background:#F1F0EA;border:1px solid var(--line);color:var(--ink);
+  font-weight:700;font-size:.9rem;text-decoration:none;transition:.15s;
+}
+.blog-brand-chip:hover{background:var(--gold);border-color:var(--gold);color:#111}
+
+.blog-rel-products{margin-top:52px;padding-top:40px;border-top:1px solid var(--line)}
+.blog-rel-products .prod-grid{grid-template-columns:repeat(4,1fr)}
+.blog-cat-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+@media (max-width:960px){ .blog-rel-products .prod-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){
+  .blog-rel-products .prod-grid{grid-template-columns:1fr}
+  .blog-cat-links .btn{width:100%;text-align:center}
+}
+
+/* ---------- Blog: ilgili yazılar link listesi ---------- */
+.blog-rel-read{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+.blog-rel-read h3{font-size:1.05rem;color:var(--ink);margin-bottom:12px}
+.blog-rel-read-list{display:grid;gap:9px;list-style:none;padding:0;margin:0}
+.blog-rel-read-list li{position:relative;padding-left:22px}
+.blog-rel-read-list li::before{content:"→";position:absolute;left:0;color:var(--gold);font-weight:800}
+.blog-rel-read-list a{color:var(--ink);font-weight:600;text-decoration:none;transition:color .15s}
+.blog-rel-read-list a:hover{color:var(--gold-ink,#a8791f);text-decoration:underline}
