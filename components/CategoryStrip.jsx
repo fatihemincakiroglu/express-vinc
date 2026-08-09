@@ -11,7 +11,7 @@ export default function CategoryStrip({ lang = "tr" }) {
       <div className="container">
         <div className="cat-grid">
           {cats.map((label, i) => (
-            <Link href={r(lang, "services")} className="cat-item" key={label}>
+            <Link href={r(lang, `cat${i}`)} className="cat-item" key={label}>
               <span className="cat-icon">{ICONS[i]}</span>
               <span className="cat-label">{label}</span>
             </Link>
