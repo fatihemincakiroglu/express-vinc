@@ -3,8 +3,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { CAT_ICONS } from "@/components/CatIcons";
 import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
-import { r, productPath } from "@/lib/routes";
-import { capText, similarProducts, productImage } from "@/lib/products";
+import { r, productPath, brandPath } from "@/lib/routes";
+import { capText, similarProducts, productImage, brandSlug } from "@/lib/products";
 
 export default function ProductDetailPage({ lang = "tr", product }) {
   const t = T[lang];
@@ -44,6 +44,11 @@ export default function ProductDetailPage({ lang = "tr", product }) {
             <div className="pdx-info">
               <span className="eyebrow">{catName}</span>
               <h2>{product.model}</h2>
+              {product.brand && (
+                <Link href={brandPath(lang, brandSlug(product.brand))} className="pdx-brand">
+                  {pp.byBrandLabel}: <strong>{product.brand}</strong> →
+                </Link>
+              )}
               <p className="pdx-lead">{desc}</p>
 
               <div className="pdx-stats">

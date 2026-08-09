@@ -783,3 +783,36 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .catp-cta .btn{width:100%}
   .catp-sec h2{font-size:1.18rem}
 }
+
+/* ---------- Markalar sayfası (özet blok) ---------- */
+.brand-block{
+  border-top:1px solid var(--line);padding-top:30px;margin-top:38px;
+}
+.brand-block:first-of-type{border-top:0;margin-top:20px;padding-top:0}
+.brand-block-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap;
+}
+.brand-block-head h2{font-size:1.5rem;color:var(--ink);line-height:1.1}
+.brand-block-count{color:#8a8a80;font-size:.85rem;font-weight:600}
+.brand-viewall{white-space:nowrap;flex-shrink:0}
+.brand-grid{grid-template-columns:repeat(4,1fr)}
+.brand-mini{text-decoration:none;color:inherit}
+.brand-mini .pcard-body h3{font-size:.98rem}
+@media (max-width:960px){ .brand-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:560px){
+  .brand-grid{grid-template-columns:1fr}
+  .brand-block-head{align-items:flex-start;flex-direction:column;gap:8px}
+  .brand-viewall{width:100%;text-align:center}
+}
+
+/* ---------- Tekil marka sayfası ---------- */
+.brandpg-head h1{font-size:2rem;color:var(--ink);margin-bottom:12px}
+
+/* ---------- Ürün detayında marka linki ---------- */
+.pdx-brand{
+  display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;
+  font-size:.9rem;color:#6a6a60;text-decoration:none;transition:color .15s;
+}
+.pdx-brand strong{color:var(--ink);font-weight:800}
+.pdx-brand:hover{color:var(--gold-ink,#a8791f)}
+.pdx-brand:hover strong{color:var(--gold-ink,#a8791f)}
