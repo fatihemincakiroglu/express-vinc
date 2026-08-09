@@ -904,3 +904,22 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .nav-dropdown::after{display:none}
   .nav-submenu a{padding:8px 10px !important}
 }
+
+/* ---------- Navbar Markalar açılır menü (geniş, grid) ---------- */
+.nav-dropdown-wide .nav-submenu{min-width:300px}
+.nav-submenu-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+}
+.nav-submenu-grid .nav-submenu-all{
+  grid-column:1 / -1;margin-top:6px;padding-top:10px !important;
+  border-top:1px solid var(--line);border-radius:0 !important;
+  color:var(--pine-700);font-weight:800 !important;
+}
+.nav-submenu-grid .nav-submenu-all:hover{background:transparent;color:var(--gold-ink,#a8791f)}
+
+/* Mobil: markalar tek sütun akordeon */
+@media (max-width:900px){
+  .nav-dropdown-wide .nav-submenu{min-width:0}
+  .nav-submenu-grid{grid-template-columns:1fr}
+  .nav-submenu-grid .nav-submenu-all{border-top:0;padding-top:8px !important}
+}

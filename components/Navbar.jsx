@@ -5,13 +5,19 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { T } from "@/lib/i18n";
-import { r, switchPath } from "@/lib/routes";
+import { r, switchPath, brandPath } from "@/lib/routes";
+import { BRANDS, productsByBrand, brandSlug } from "@/lib/products";
 
 export default function Navbar({ lang = "tr" }) {
   const t = T[lang];
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [subOpen, setSubOpen] = useState(false); // mobil açılır menü durumu
+  const [openMenu, setOpenMenu] = useState(null); // hangi dropdown açık: "brands" | "corporate" | null
+
+  // Markalar alt menüsü (ürün sayısına göre sıralı)
+  const brandItems = [...BRANDS]
+    .sort((a, b) => productsByBrand(b).length - productsByBrand(a).length)
+    .map((b) => ({ href: brandPath(lang, brandSlug(b)), label: b }));
 
   // Kurumsal alt menüsü
   const corporate = [
@@ -23,14 +29,15 @@ export default function Navbar({ lang = "tr" }) {
   const LINKS = [
     { href: r(lang, "home"), label: t.nav.home, exact: true },
     { href: r(lang, "products"), label: t.nav.products },
-    { href: r(lang, "brands"), label: t.nav.brands },
-    { type: "dropdown", label: t.nav.corporate, children: corporate },
+    { type: "dropdown", id: "brands", label: t.nav.brands, href: r(lang, "brands"), children: brandItems, viewAll: true },
+    { type: "dropdown", id: "corporate", label: t.nav.corporate, children: corporate },
     { href: r(lang, "blog"), label: t.nav.blog },
     { href: r(lang, "contact"), label: t.nav.contact },
   ];
 
   const langHref = (l) => switchPath(pathname, l);
   const isActive = (href, exact) => (exact ? pathname === href : pathname.startsWith(href));
+  const closeAll = () => { setOpen(false); setOpenMenu(null); };
 
   return (
     <>
@@ -60,34 +67,40 @@ export default function Navbar({ lang = "tr" }) {
           <nav className={`nav-links${open ? " open" : ""}`}>
             {LINKS.map((l) => {
               if (l.type === "dropdown") {
-                const anyActive = l.children.some((c) => pathname.startsWith(c.href));
+                const isOpen = openMenu === l.id;
+                const anyActive = (l.href && pathname.startsWith(l.href)) || l.children.some((c) => pathname.startsWith(c.href));
                 return (
                   <div
-                    key={l.label}
-                    className={`nav-dropdown${subOpen ? " sub-open" : ""}`}
-                    onMouseEnter={() => setSubOpen(true)}
-                    onMouseLeave={() => setSubOpen(false)}
+                    key={l.id}
+                    className={`nav-dropdown${isOpen ? " sub-open" : ""}${l.id === "brands" ? " nav-dropdown-wide" : ""}`}
+                    onMouseEnter={() => setOpenMenu(l.id)}
+                    onMouseLeave={() => setOpenMenu(null)}
                   >
                     <button
                       type="button"
                       className={`nav-dropdown-toggle${anyActive ? " active" : ""}`}
-                      onClick={() => setSubOpen((v) => !v)}
-                      aria-expanded={subOpen}
+                      onClick={() => setOpenMenu((v) => (v === l.id ? null : l.id))}
+                      aria-expanded={isOpen}
                     >
                       {l.label}
                       <span className="nav-caret" aria-hidden="true">▾</span>
                     </button>
-                    <div className="nav-submenu">
+                    <div className={`nav-submenu${l.id === "brands" ? " nav-submenu-grid" : ""}`}>
                       {l.children.map((c) => (
                         <Link
                           key={c.href}
                           href={c.href}
                           className={pathname.startsWith(c.href) ? "active" : undefined}
-                          onClick={() => { setOpen(false); setSubOpen(false); }}
+                          onClick={closeAll}
                         >
                           {c.label}
                         </Link>
                       ))}
+                      {l.viewAll && (
+                        <Link href={l.href} className="nav-submenu-all" onClick={closeAll}>
+                          {t.prodPage?.viewAllBrand || "Tümü"} →
+                        </Link>
+                      )}
                     </div>
                   </div>
                 );
@@ -97,7 +110,7 @@ export default function Navbar({ lang = "tr" }) {
                   key={l.href}
                   href={l.href}
                   className={isActive(l.href, l.exact) ? "active" : undefined}
-                  onClick={() => setOpen(false)}
+                  onClick={closeAll}
                 >
                   {l.label}
                 </Link>
