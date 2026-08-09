@@ -857,3 +857,7 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 .blog-rel-read-list li::before{content:"→";position:absolute;left:0;color:var(--gold);font-weight:800}
 .blog-rel-read-list a{color:var(--ink);font-weight:600;text-decoration:none;transition:color .15s}
 .blog-rel-read-list a:hover{color:var(--gold-ink,#a8791f);text-decoration:underline}
+
+/* ---------- Ürünler sayfası: kategori başlığı ikon hizası ---------- */
+.brand-block-title{display:flex;align-items:center;gap:14px}
+.brand-block-title .dd-ico{width:34px;height:34px;flex:none;color:var(--ink)}
