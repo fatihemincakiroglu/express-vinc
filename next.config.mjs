@@ -2,12 +2,16 @@
 const nextConfig = {
   async redirects() {
     return [
+      // Kaldırılan Hizmetler sayfası → ana sayfaya kalıcı (301) yönlendirme
+      { source: "/hizmetler", destination: "/", permanent: true },
+      { source: "/en/services", destination: "/en", permanent: true },
+      { source: "/de/leistungen", destination: "/de", permanent: true },
       // Eski Türkçe slug'lı EN/DE adresleri yeni yerelleştirilmiş adreslere kalıcı yönlendir
-      { source: "/en/hizmetler", destination: "/en/services", permanent: true },
+      { source: "/en/hizmetler", destination: "/en", permanent: true },
       { source: "/en/hakkimizda", destination: "/en/about", permanent: true },
       { source: "/en/iletisim", destination: "/en/contact", permanent: true },
       { source: "/en/rezervasyon", destination: "/en/reservation", permanent: true },
-      { source: "/de/hizmetler", destination: "/de/leistungen", permanent: true },
+      { source: "/de/hizmetler", destination: "/de", permanent: true },
       { source: "/de/hakkimizda", destination: "/de/ueber-uns", permanent: true },
       { source: "/de/iletisim", destination: "/de/kontakt", permanent: true },
       { source: "/de/rezervasyon", destination: "/de/reservierung", permanent: true },

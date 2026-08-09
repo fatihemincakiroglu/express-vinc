@@ -861,3 +861,46 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
 /* ---------- Ürünler sayfası: kategori başlığı ikon hizası ---------- */
 .brand-block-title{display:flex;align-items:center;gap:14px}
 .brand-block-title .dd-ico{width:34px;height:34px;flex:none;color:var(--ink)}
+
+/* ---------- Navbar açılır menü (Kurumsal) ---------- */
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{
+  display:inline-flex;align-items:center;gap:5px;background:none;border:0;cursor:pointer;
+  font-family:inherit;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);padding:6px 0;border-bottom:2px solid transparent;transition:.2s;
+}
+.nav-dropdown-toggle:hover{color:var(--pine-700)}
+.nav-dropdown-toggle.active{color:var(--pine-900);border-color:var(--gold)}
+.nav-caret{font-size:.7em;transition:transform .2s}
+.nav-dropdown.sub-open .nav-caret{transform:rotate(180deg)}
+
+.nav-submenu{
+  position:absolute;top:100%;left:0;min-width:210px;background:#fff;
+  border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.12);
+  padding:8px;display:flex;flex-direction:column;gap:2px;
+  opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s;z-index:60;margin-top:10px;
+}
+/* Masaüstü: fareyle üzerine gelince aç */
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown.sub-open .nav-submenu{opacity:1;visibility:visible;transform:translateY(0)}
+/* toggle ile submenu arasındaki boşlukta hover kopmasın */
+.nav-dropdown::after{content:"";position:absolute;top:100%;left:0;right:0;height:12px}
+.nav-submenu a{
+  font-size:.74rem !important;letter-spacing:.1em !important;padding:10px 14px !important;
+  border-radius:8px;border-bottom:0 !important;white-space:nowrap;text-transform:uppercase;
+}
+.nav-submenu a:hover{background:#F1F0EA}
+.nav-submenu a.active{background:var(--gold);color:var(--pine-950)}
+
+/* Mobil: akordeon gibi, statik akışta göster */
+@media (max-width:900px){
+  .nav-dropdown{width:100%}
+  .nav-dropdown-toggle{width:100%;justify-content:space-between;font-size:.82rem;letter-spacing:.14em}
+  .nav-submenu{
+    position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;
+    margin:6px 0 0 12px;padding:0;min-width:0;display:none;background:transparent;
+  }
+  .nav-dropdown.sub-open .nav-submenu{display:flex}
+  .nav-dropdown::after{display:none}
+  .nav-submenu a{padding:8px 10px !important}
+}

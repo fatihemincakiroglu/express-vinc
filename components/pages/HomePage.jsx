@@ -31,7 +31,7 @@ export default function HomePage({ lang = "tr" }) {
             </div>
             <div className="hero-actions">
               <a className="btn btn-gold" href={`tel:${CONFIG.phoneLink}`}>{t.hero.call}</a>
-              <Link className="btn btn-ghost-dark" href={r(lang, "services")}>{t.hero.servicesBtn}</Link>
+              <Link className="btn btn-ghost-dark" href={r(lang, "products")}>{t.hero.servicesBtn}</Link>
             </div>
           </div>
           <QuoteCard lang={lang} />

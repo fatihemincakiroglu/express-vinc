@@ -11,19 +11,26 @@ export default function Navbar({ lang = "tr" }) {
   const t = T[lang];
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [subOpen, setSubOpen] = useState(false); // mobil açılır menü durumu
+
+  // Kurumsal alt menüsü
+  const corporate = [
+    { href: r(lang, "about"), label: t.nav.about },
+    { href: r(lang, "hr"), label: t.nav.hr },
+    { href: r(lang, "whyus"), label: t.nav.whyus },
+  ];
 
   const LINKS = [
     { href: r(lang, "home"), label: t.nav.home, exact: true },
-    { href: r(lang, "services"), label: t.nav.services },
     { href: r(lang, "products"), label: t.nav.products },
     { href: r(lang, "brands"), label: t.nav.brands },
-    { href: r(lang, "about"), label: t.nav.about },
+    { type: "dropdown", label: t.nav.corporate, children: corporate },
     { href: r(lang, "blog"), label: t.nav.blog },
     { href: r(lang, "contact"), label: t.nav.contact },
   ];
 
-  // Dil değiştirici: aynı sayfanın hedef dildeki karşılığına gider
   const langHref = (l) => switchPath(pathname, l);
+  const isActive = (href, exact) => (exact ? pathname === href : pathname.startsWith(href));
 
   return (
     <>
@@ -52,9 +59,46 @@ export default function Navbar({ lang = "tr" }) {
           </Link>
           <nav className={`nav-links${open ? " open" : ""}`}>
             {LINKS.map((l) => {
-              const active = l.exact ? pathname === l.href : pathname.startsWith(l.href);
+              if (l.type === "dropdown") {
+                const anyActive = l.children.some((c) => pathname.startsWith(c.href));
+                return (
+                  <div
+                    key={l.label}
+                    className={`nav-dropdown${subOpen ? " sub-open" : ""}`}
+                    onMouseEnter={() => setSubOpen(true)}
+                    onMouseLeave={() => setSubOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      className={`nav-dropdown-toggle${anyActive ? " active" : ""}`}
+                      onClick={() => setSubOpen((v) => !v)}
+                      aria-expanded={subOpen}
+                    >
+                      {l.label}
+                      <span className="nav-caret" aria-hidden="true">▾</span>
+                    </button>
+                    <div className="nav-submenu">
+                      {l.children.map((c) => (
+                        <Link
+                          key={c.href}
+                          href={c.href}
+                          className={pathname.startsWith(c.href) ? "active" : undefined}
+                          onClick={() => { setOpen(false); setSubOpen(false); }}
+                        >
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
               return (
-                <Link key={l.href} href={l.href} className={active ? "active" : undefined} onClick={() => setOpen(false)}>
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={isActive(l.href, l.exact) ? "active" : undefined}
+                  onClick={() => setOpen(false)}
+                >
                   {l.label}
                 </Link>
               );

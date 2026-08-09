@@ -17,10 +17,11 @@ export default function Footer({ lang = "tr" }) {
             <h4>{t.footer.quick}</h4>
             <ul>
               <li><Link href={r(lang, "home")}>{t.nav.home}</Link></li>
-              <li><Link href={r(lang, "services")}>{t.nav.services}</Link></li>
               <li><Link href={r(lang, "products")}>{t.nav.products}</Link></li>
               <li><Link href={r(lang, "brands")}>{t.nav.brands}</Link></li>
               <li><Link href={r(lang, "about")}>{t.nav.about}</Link></li>
+              <li><Link href={r(lang, "whyus")}>{t.nav.whyus}</Link></li>
+              <li><Link href={r(lang, "hr")}>{t.nav.hr}</Link></li>
               <li><Link href={r(lang, "blog")}>{t.nav.blog}</Link></li>
               <li><Link href={r(lang, "contact")}>{t.nav.contact}</Link></li>
             </ul>
