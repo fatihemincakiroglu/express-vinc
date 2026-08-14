@@ -7,8 +7,8 @@ import { blogFullContent } from "@/lib/blog-content";
 import { T } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { CONFIG } from "@/lib/config";
-import { r, blogPostPath, productPath, brandPath } from "@/lib/routes";
-import { PRODUCTS, capText, productImage, brandSlug } from "@/lib/products";
+import { r, blogPostPath, productPath } from "@/lib/routes";
+import { PRODUCTS, capText, productImage } from "@/lib/products";
 
 const LOCALE = { tr: "tr-TR", en: "en-GB", de: "de-DE" };
 
@@ -65,11 +65,17 @@ export default function BlogPostPage({ lang = "tr", post }) {
   const relProducts = relCats.length
     ? PRODUCTS.filter((p) => relCats.includes(p.cat)).slice(0, 6)
     : [];
-  const relBrands = links.brands || [];
   const usedKeys = new Set();
 
   // 10 başlıklı genişletilmiş içerik
   const fullContent = blogFullContent(post, lang, t);
+
+  // İçindekiler için başlıkları topla (id'lerle)
+  const slugifyH = (txt) => txt.toLowerCase()
+    .replace(/[çğıöşü]/g, (m) => ({ "ç": "c", "ğ": "g", "ı": "i", "ö": "o", "ş": "s", "ü": "u" }[m]))
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  const headings = fullContent.filter((b) => b.h).map((b, idx) => ({ text: b.h, id: `bolum-${idx + 1}-${slugifyH(b.h)}` }));
+  let headIdx = 0;
 
   const url = SITE_URL + blogPostPath(lang, post);
   const plainText = c.content.filter((b) => b.p).map((b) => b.p).join(" ");
@@ -106,8 +112,25 @@ export default function BlogPostPage({ lang = "tr", post }) {
             <p className="eyebrow">{c.category} · {fmt(post.date)}</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="article-cover" src={post.cover} alt={c.title} />
+
+            {/* İçindekiler tablosu */}
+            {headings.length > 1 && (
+              <nav className="blog-toc" aria-label={t.blogSec.tocH}>
+                <p className="blog-toc-title">{t.blogSec.tocH}</p>
+                <ol className="blog-toc-list">
+                  {headings.map((hd) => (
+                    <li key={hd.id}><a href={`#${hd.id}`}>{hd.text}</a></li>
+                  ))}
+                </ol>
+              </nav>
+            )}
+
             {fullContent.map((block, i) => {
-              if (block.h) return <h2 key={i}>{block.h}</h2>;
+              if (block.h) {
+                const hid = headings[headIdx]?.id;
+                headIdx += 1;
+                return <h2 key={i} id={hid}>{block.h}</h2>;
+              }
               if (block.ul) return (
                 <ul className="catp-ul" key={i}>
                   {block.ul.map((li) => <li key={li}>{li}</li>)}
@@ -127,36 +150,6 @@ export default function BlogPostPage({ lang = "tr", post }) {
               );
               return <p key={i}>{linkifyParagraph(block.p, links.related, lang, usedKeys)}</p>;
             })}
-
-            {/* İlgili markalar */}
-            {relBrands.length > 0 && (
-              <div className="blog-rel-brands">
-                <h3>{t.blogSec.relatedBrandsH}</h3>
-                <div className="blog-brand-chips">
-                  {relBrands.map((b) => (
-                    <Link key={b} href={brandPath(lang, brandSlug(b))} className="blog-brand-chip">{b}</Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* İlgili yazılar — anahtar kelime linkleri (garantili) */}
-            {links.related && links.related.length > 0 && (
-              <div className="blog-rel-read">
-                <h3>{t.blogSec.relatedReadH}</h3>
-                <ul className="blog-rel-read-list">
-                  {links.related.map((l) => {
-                    const target = POSTS.find((p) => p.slugs.tr === l.slug);
-                    if (!target) return null;
-                    return (
-                      <li key={l.slug}>
-                        <Link href={blogPostPath(lang, target)}>{target[lang].title}</Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
 
             <Link href={r(lang, "blog")} className="btn btn-ghost" style={{ marginTop: 28 }}>{t.blogSec.back}</Link>
           </article>
