@@ -990,3 +990,34 @@ footer{background:#F4F3ED;color:#55554E;border-top:1px solid var(--line)}
   .nav-submenu-grid{grid-template-columns:1fr}
   .nav-submenu-grid .nav-submenu-all{border-top:0;padding-top:8px !important}
 }
+
+/* ---------- CV Başvuru Formu ---------- */
+.container-narrow{max-width:760px}
+.cv-form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:38px 34px;box-shadow:0 10px 34px rgba(0,0,0,.05)}
+.cv-form-head{text-align:center;margin-bottom:28px}
+.cv-form-head h3{font-size:1.5rem;color:var(--ink);margin-bottom:8px}
+.cv-form-head p{color:var(--muted);font-size:.95rem}
+.cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cv-field{display:flex;flex-direction:column;gap:7px}
+.cv-field-full{grid-column:1 / -1}
+.cv-field>span{font-size:.82rem;font-weight:700;color:var(--ink);letter-spacing:.02em}
+.cv-field input,.cv-field textarea{
+  border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-family:inherit;font-size:.95rem;
+  background:#FAFAF8;transition:border-color .15s,box-shadow .15s;color:var(--ink);resize:vertical;
+}
+.cv-field input:focus,.cv-field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,221,19,.18);background:#fff}
+.cv-upload{display:flex;flex-direction:column;gap:6px;cursor:pointer}
+.cv-upload-btn{
+  display:flex;align-items:center;gap:10px;border:2px dashed var(--line);border-radius:12px;
+  padding:16px 18px;color:var(--pine-700);font-weight:600;font-size:.92rem;transition:.18s;background:#FAFAF8;
+}
+.cv-upload:hover .cv-upload-btn{border-color:var(--gold);background:#FFFCEB;color:var(--ink)}
+.cv-upload-btn svg{width:22px;height:22px;flex:none;color:var(--gold-deep)}
+.cv-upload small{color:#9a9a8f;font-size:.78rem;padding-left:2px}
+.cv-note{font-size:.82rem;color:#8a8a80;margin-top:18px;line-height:1.5;text-align:center}
+.cv-actions{display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+@media (max-width:560px){
+  .cv-grid{grid-template-columns:1fr}
+  .cv-form{padding:28px 20px}
+  .cv-actions .btn{width:100%;text-align:center}
+}
