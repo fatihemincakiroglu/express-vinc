@@ -46,7 +46,7 @@ export default function Navbar({ lang = "tr" }) {
           <span className="topbar-mobile">{t.topbarMobile}</span>
           <div className="topbar-scroll" aria-hidden="true">
             <div className="topbar-scroll-inner">
-              {[0, 1, 2, 3].map((i) => <span key={i}>{t.topbar} ✦ </span>)}
+              {[0, 1, 2, 3].map((i) => <span key={i}>{t.topbar}</span>)}
             </div>
           </div>
           <nav className="lang-switch" aria-label="Language">
