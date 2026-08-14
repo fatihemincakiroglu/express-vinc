@@ -11,6 +11,13 @@ import Reviews from "@/components/Reviews";
 import Faq from "@/components/Faq";
 import BlogCards from "@/components/BlogCards";
 
+// Adım ikonları: 1) İhtiyaç ilet (sohbet) 2) Teklif & onay (belge) 3) Teslimat (kamyon)
+const STEP_ICONS = [
+  <svg key="1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>,
+  <svg key="2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>,
+  <svg key="3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>,
+];
+
 export default function HomePage({ lang = "tr" }) {
   const t = T[lang];
   return (
@@ -51,22 +58,31 @@ export default function HomePage({ lang = "tr" }) {
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section steps-section" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="section-head">
+          <div className="section-head center">
             <span className="eyebrow">{t.steps.eyebrow}</span>
             <h2>{t.steps.h2}</h2>
           </div>
           <div className="steps">
             {t.steps.list.map((s, i) => (
               <div className="step-card" key={s.t}>
-                <span className="step-num">{i + 1}</span>
+                <span className="step-badge">{i + 1}</span>
+                <span className="step-ico">{STEP_ICONS[i]}</span>
                 <h3>{s.t}</h3>
                 <p>{s.d}</p>
+                {i < t.steps.list.length - 1 && (
+                  <span className="step-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </span>
+                )}
               </div>
             ))}
           </div>
-          <a className="btn btn-gold" style={{ marginTop: 30 }} href={`https://wa.me/${CONFIG.whatsapp}`} target="_blank" rel="noopener">{t.steps.btn}</a>
+          <div className="steps-cta">
+            <a className="btn btn-gold" href={`https://wa.me/${CONFIG.whatsapp}`} target="_blank" rel="noopener">{t.steps.btn}</a>
+            <a className="btn btn-ghost" href={`tel:${CONFIG.phoneLink}`}>☎ {CONFIG.phoneDisplay}</a>
+          </div>
         </div>
       </section>
 
