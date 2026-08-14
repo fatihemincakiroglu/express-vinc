@@ -8,6 +8,7 @@ export default function LayoutShell({ lang, children }) {
   return (
     <html lang={lang}>
       <head>
+        <meta name="google-site-verification" content="csWJCNwtY2EF4ngXSRtivTbM1_i6L7ku2EcPQDvxOb4" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
