@@ -46,7 +46,7 @@ export default function Footer({ lang = "tr" }) {
         </div>
         <div className="footer-bottom">
           <span>© 2026 {CONFIG.legalName} — {t.footer.rights}</span>
-          <span className="seo-credit"><a href="https://fatihemincakiroglu.com/" target="_blank" rel="noopener">{t.footer.seo}</a> Fatih Emin Çakıroğlu</span>
+          <span className="seo-credit"><a href="https://fatihemincakiroglu.com/geo-uzmani" target="_blank" rel="noopener">{t.footer.seo}</a> Fatih Emin Çakıroğlu</span>
         </div>
       </div>
     </footer>
