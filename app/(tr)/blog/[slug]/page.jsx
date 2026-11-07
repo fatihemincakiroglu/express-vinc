@@ -10,7 +10,8 @@ export function generateStaticParams() {
 
 const abs = (p) => (p === "/" ? SITE_URL : SITE_URL + p);
 
-export function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const post = getPost("tr", params.slug);
   if (!post) return {};
   const c = post["tr"];
@@ -29,7 +30,8 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function Page({ params }) {
+export default async function Page(props) {
+  const params = await props.params;
   const post = getPost("tr", params.slug);
   if (!post) notFound();
   return <BlogPostPage lang="tr" post={post} />;
