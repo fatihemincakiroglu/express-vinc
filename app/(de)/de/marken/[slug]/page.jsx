@@ -7,7 +7,8 @@ export function generateStaticParams() {
   return BRANDS.map((b) => ({ slug: brandSlug(b) }));
 }
 
-export function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const brand = brandFromSlug(params.slug);
   if (!brand) return {};
   const title = `${brand} Bühnen- & Kranmodelle | Express Vinc`;
@@ -15,7 +16,8 @@ export function generateMetadata({ params }) {
   return makeMeta({ lang: "de", key: "brands", title, description: desc, subSlug: params.slug });
 }
 
-export default function Page({ params }) {
+export default async function Page(props) {
+  const params = await props.params;
   const brand = brandFromSlug(params.slug);
   if (!brand) notFound();
   return <BrandPage lang="de" brand={brand} />;
